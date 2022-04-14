@@ -356,13 +356,13 @@ if (params.single_end) {
                 design_replicates_exist;
                 design_multiple_samples }
 } else {
-    ch_design_reads_csv
+    ch_design_reads_csv.subscribe{ it
         .splitCsv(header:true, sep:',')
         .map { row -> [ row.sample_id, [ file(row.fastq_1, checkIfExists: true), file(row.fastq_2, checkIfExists: true) ] ] }
         .into { ch_raw_reads_fastqc;
                 ch_raw_reads_trimgalore;
                 design_replicates_exist;
-                design_multiple_samples }
+                design_multiple_samples }}
 }
 
 // Boolean value for replicates existing in design
