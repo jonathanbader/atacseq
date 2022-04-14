@@ -328,6 +328,10 @@ if (!params.macs_gsize) {
 /*
  * PREPROCESSING: Reformat design file and check validitiy
  */
+
+
+log.info('Before Check Design')
+
 process CHECK_DESIGN {
     tag "$design"
     publishDir "${params.outdir}/pipeline_info", mode: params.publish_dir_mode
@@ -344,6 +348,8 @@ process CHECK_DESIGN {
     """
 }
 
+log.info('After Check Design')
+
 /*
  * Create channels for input fastq files
  */
@@ -356,13 +362,13 @@ if (params.single_end) {
                 design_replicates_exist;
                 design_multiple_samples }
 } else {
-    ch_design_reads_csv.subscribe{ it
+    ch_design_reads_csv
         .splitCsv(header:true, sep:',')
         .map { row -> [ row.sample_id, [ file(row.fastq_1, checkIfExists: true), file(row.fastq_2, checkIfExists: true) ] ] }
         .into { ch_raw_reads_fastqc;
                 ch_raw_reads_trimgalore;
                 design_replicates_exist;
-                design_multiple_samples }}
+                design_multiple_samples }
 }
 
 // Boolean value for replicates existing in design
