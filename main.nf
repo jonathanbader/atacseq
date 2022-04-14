@@ -331,6 +331,7 @@ if (!params.macs_gsize) {
 
 
 log.info('Before Check Design')
+log.info('' + ch_input)
 
 process CHECK_DESIGN {
     tag "$design"
@@ -349,7 +350,7 @@ process CHECK_DESIGN {
 }
 
 log.info('After Check Design')
-
+ch_design_reads_csv.view()
 /*
  * Create channels for input fastq files
  */
