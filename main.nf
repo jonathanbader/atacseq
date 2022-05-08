@@ -175,6 +175,9 @@ ch_mrep_deseq2_clustering_header = file("$baseDir/assets/multiqc/mrep_deseq2_clu
 /* --          VALIDATE INPUTS                 -- */
 ////////////////////////////////////////////////////
 
+
+log.info("params: "+ params.gtf + "")
+
 if (params.input)     { ch_input = file(params.input, checkIfExists: true) } else { exit 1, 'Samples design file not specified!' }
 if (params.gtf)       { ch_gtf = file(params.gtf, checkIfExists: true) } else { exit 1, 'GTF annotation file not specified!' }
 if (params.gene_bed)  { ch_gene_bed = file(params.gene_bed, checkIfExists: true) }
