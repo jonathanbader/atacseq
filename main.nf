@@ -658,7 +658,7 @@ process BWA_MEM {
         $score \\
         ${index}/${bwa_base} \\
         $reads \\
-        | samtools view -@ $task.cpus -b -h -F 0x0100 -O BAM -o ${prefix}.bam -
+        | samtools view -h -@ $task.cpus -b -h -F 0x0100 -O BAM -o ${prefix}.bam -
     """
 }
 
