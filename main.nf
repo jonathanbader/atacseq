@@ -401,6 +401,9 @@ multipleGroups = design_multiple_samples
 /*
  * PREPROCESSING: Build BWA index
  */
+
+ log.info("BWA index: " + params.bwa_index)
+
 if (!params.bwa_index) {
     process BWA_INDEX {
         tag "$fasta"
